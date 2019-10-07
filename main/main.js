@@ -25,34 +25,26 @@ module.exports = function main(input) {
                 UnitPriceCola = input[i].Price;
                 SubtotalCola += UnitPriceCola;
             }
-        }
 
-        for(var x = 0; x <= input.length-1; x++)
-        {
-            if(input[x].Name == 'Sprite')
+            if(input[i].Name == 'Sprite')
             {
                 SpriteName = input[i].Name;
                 numBottlesSprite += 1;
                 UnitPriceSprite = input[i].Price;
                 SubtotalSprite += UnitPriceCola;
             }
+
+             if(input[i].Name == 'Battery')
+            {
+                BatteryName = input[i].Name;
+                numBottlesBattery += 1;
+                UnitPriceBattery = input[i].Price;
+                SubtotalBattery += UnitPriceCola-1;
+            }
+            Total += input[i].Price
         }
 
-        for(var y = 0; y <= input.length-1; y++)
-            {
-                if(input[y].Name == 'Battery')
-                {
-                    BatteryName = input[i].Name;
-                    numBottlesBattery += 1;
-                    UnitPriceBattery = input[i].Price;
-                    SubtotalBattery += UnitPriceCola;
-                }
-            }
 
-            for(var z = 0; z <= input.length-1; z++)
-            {
-                Total += input[z].Price
-            }
 
 
     let expectText =
