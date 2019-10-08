@@ -1,20 +1,17 @@
 module.exports = function main(input) {
     const header = '***<store earning no money>Receipt ***\n';
-    var prodBarcode = '';
     var prodName = '';
     var prodUnit = '';
     var prodQuantity = 0;
     var prodPrice = 0;
     var prodSubPrice = 0;
-    var init = 0;
     var getProductLine = '';
     var concatValue = '';
     var value;
     var Total = 0;
-let myData = [];
+    let myData = [];
 
-
-    unique = [...new Set(input.map(a => a.Barcode))];
+    let unique = [...new Set(input.map(a => a.Barcode))];
 
     for(var x = unique.length-1; x >= 0; x--)
     {
@@ -62,113 +59,11 @@ let myData = [];
     }
 
 
-  var end = '----------------------\n' +
+  var endReceipt = '----------------------\n' +
             'Total: '+Total.toFixed(2)+' (yuan)\n' +
             '**********************\n';
 
 
-    var finalconcatValue = header + concatValue + end;
+    var finalconcatValue = header + concatValue + endReceipt;
     return finalconcatValue;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//for(var i = 0; i < collectBarcodes.length-1; i++)
-//{
-//    if(collectBarcodes[i] == input[i].Barcode)
-//    {
-//        if(prodName == input[i].Name)
-//        {
-//            prodName = input[i].Name;
-//            prodUnit = input[i].Unit
-//            prodQuantity += 1;
-//            prodPrice = input[i].Price;
-//            prodSubPrice = prodPrice * prodQuantity;
-//        }
-//        else
-//        {
-//            var getProductLine = 'Name: '+prodName+', Quantity: '+prodQuantity+' ' +prodUnit+', Unit price: '+prodPrice.toFixed(2)+' (yuan), Subtotal: '+prodSubPrice.toFixed(2)+' (yuan)\n';
-//            var concatProductLine = getProductLine.concat(getProductLine,getProductLine);
-////            if(i == input.length-1)
-////                {
-//                    return concatProductLine;
-////                }
-//        }
-//    }
-//
-//}
-
-
-
-
-
-
-//        for(var i = 0; i <= input.length-1; i++)
-//        {
-//            //Initialize
-//            if(init == 0)
-//            {
-//                init = 1;
-//                prodBarcode = input[i].Barcode; //Coke == Coke
-//            }
-//
-//            if(input[i].Barcode == prodBarcode)
-//            {
-//                prodName = input[i].Name;
-//                prodUnit = input[i].Unit
-//                prodQuantity += 1;
-//                prodPrice = input[i].Price;
-//                prodSubPrice += prodPrice;
-//            }
-//            else
-//            {
-//                var getProductLine = 'Name: '+prodName+', Quantity: '+prodQuantity+' ' +prodUnit+', Unit price: '+prodPrice.toFixed(2)+' (yuan), Subtotal: '+prodSubPrice.toFixed(2)+' (yuan)\n';
-//                prodBarcode = input[i].Barcode;
-//                prodName = input[i].Name;
-//                prodUnit = input[i].Unit
-//                prodQuantity += 1;
-//                prodPrice = input[i].Price;
-//                prodSubPrice += prodPrice;
-//            }
-////            Total += input[i].Price
-//            if(i == input.length-1)
-//            {
-//               return getProductLine;
-//            }
-//        }
-//};
