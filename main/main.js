@@ -1,59 +1,174 @@
 module.exports = function main(input) {
-    var ColaName = '';
-    var numBottlesCola = 0;
-    var UnitPriceCola = 0;
-    var SubtotalCola = 0;
-
-    var SpriteName = '';
-    var numBottlesSprite = 0;
-    var UnitPriceSprite = 0;
-    var SubtotalSprite = 0;
-
-    var BatteryName = '';
-    var numBottlesBattery = 0;
-    var UnitPriceBattery = 0;
-    var SubtotalBattery = 0;
-
+    const header = '***<store earning no money>Receipt ***\n';
+    var prodBarcode = '';
+    var prodName = '';
+    var prodUnit = '';
+    var prodQuantity = 0;
+    var prodPrice = 0;
+    var prodSubPrice = 0;
+    var init = 0;
+    var getProductLine = '';
+    var concatValue = '';
+    var value;
     var Total = 0;
+let myData = [];
 
-        for(var i = 0; i <= input.length-1; i++)
+
+    unique = [...new Set(input.map(a => a.Barcode))];
+
+    for(var x = unique.length-1; x >= 0; x--)
+    {
+        for(var y = input.length-1; y >= 0; y--)
         {
-            if(input[i].Name == 'Coca-Cola')
+            if(unique[x] == input[y].Barcode)
             {
-                ColaName = input[i].Name;
-                numBottlesCola += 1;
-                UnitPriceCola = input[i].Price;
-                SubtotalCola += UnitPriceCola;
+                prodName = input[y].Name;
+                prodUnit = input[y].Unit
+                prodQuantity += 1;
+                prodPrice = input[y].Price;
+                prodSubPrice = prodPrice * prodQuantity;
+                Total += input[y].Price
             }
-
-            if(input[i].Name == 'Sprite')
-            {
-                SpriteName = input[i].Name;
-                numBottlesSprite += 1;
-                UnitPriceSprite = input[i].Price;
-                SubtotalSprite += UnitPriceCola;
-            }
-
-             if(input[i].Name == 'Battery')
-            {
-                BatteryName = input[i].Name;
-                numBottlesBattery += 1;
-                UnitPriceBattery = input[i].Price;
-                SubtotalBattery += UnitPriceCola-1;
-            }
-            Total += input[i].Price
         }
 
+        if(prodUnit == 'a')
+        {
+              getProductLine = 'Name: '+prodName+', Quantity: '+prodQuantity+', Unit price: '+prodPrice.toFixed(2)+' (yuan), Subtotal: '+prodSubPrice.toFixed(2)+' (yuan)\n';
+              myData.push(getProductLine);
+        }
+        else if(prodQuantity > 1)
+        {
+                getProductLine = 'Name: '+prodName+', Quantity: '+prodQuantity+' ' +prodUnit+'s'+', Unit price: '+prodPrice.toFixed(2)+' (yuan), Subtotal: '+prodSubPrice.toFixed(2)+' (yuan)\n';
+                myData.push(getProductLine);
+        }
+        else
+        {
+              getProductLine = 'Name: '+prodName+', Quantity: '+prodQuantity+' ' +prodUnit+', Unit price: '+prodPrice.toFixed(2)+' (yuan), Subtotal: '+prodSubPrice.toFixed(2)+' (yuan)\n';
+              myData.push(getProductLine);
+        }
+            var concatProductLine = getProductLine.concat(getProductLine,concatProductLine);
+            prodName = '';
+            prodUnit = '';
+            prodQuantity = 0;
+            prodPrice = 0;
+            prodSubPrice = 0;
+
+    }
+
+     for(var i = myData.length-1; i >=0 ; i--)
+    {
+       value = myData[i];
+       concatValue += value;
+    }
 
 
+  var end = '----------------------\n' +
+            'Total: '+Total.toFixed(2)+' (yuan)\n' +
+            '**********************\n';
 
-    let expectText =
-                '***<store earning no money>Receipt ***\n' +
-                'Name: '+ColaName+', Quantity: '+numBottlesCola+' bottles, Unit price: '+UnitPriceCola+'.00 (yuan), Subtotal: '+SubtotalCola+'.00 (yuan)\n' +
-                'Name: '+SpriteName+', Quantity: '+numBottlesSprite+' bottles, Unit price: '+UnitPriceSprite+'.00 (yuan), Subtotal: '+SubtotalSprite+'.00 (yuan)\n' +
-                'Name: '+BatteryName+', Quantity: '+numBottlesBattery+', Unit price: '+UnitPriceBattery+'.00 (yuan), Subtotal: '+SubtotalBattery+'.00 (yuan)\n' +
-                '----------------------\n' +
-                'Total: '+Total+'.00 (yuan)\n' +
-                '**********************\n';
-    return  expectText;
+
+    var finalconcatValue = header + concatValue + end;
+    return finalconcatValue;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//for(var i = 0; i < collectBarcodes.length-1; i++)
+//{
+//    if(collectBarcodes[i] == input[i].Barcode)
+//    {
+//        if(prodName == input[i].Name)
+//        {
+//            prodName = input[i].Name;
+//            prodUnit = input[i].Unit
+//            prodQuantity += 1;
+//            prodPrice = input[i].Price;
+//            prodSubPrice = prodPrice * prodQuantity;
+//        }
+//        else
+//        {
+//            var getProductLine = 'Name: '+prodName+', Quantity: '+prodQuantity+' ' +prodUnit+', Unit price: '+prodPrice.toFixed(2)+' (yuan), Subtotal: '+prodSubPrice.toFixed(2)+' (yuan)\n';
+//            var concatProductLine = getProductLine.concat(getProductLine,getProductLine);
+////            if(i == input.length-1)
+////                {
+//                    return concatProductLine;
+////                }
+//        }
+//    }
+//
+//}
+
+
+
+
+
+
+//        for(var i = 0; i <= input.length-1; i++)
+//        {
+//            //Initialize
+//            if(init == 0)
+//            {
+//                init = 1;
+//                prodBarcode = input[i].Barcode; //Coke == Coke
+//            }
+//
+//            if(input[i].Barcode == prodBarcode)
+//            {
+//                prodName = input[i].Name;
+//                prodUnit = input[i].Unit
+//                prodQuantity += 1;
+//                prodPrice = input[i].Price;
+//                prodSubPrice += prodPrice;
+//            }
+//            else
+//            {
+//                var getProductLine = 'Name: '+prodName+', Quantity: '+prodQuantity+' ' +prodUnit+', Unit price: '+prodPrice.toFixed(2)+' (yuan), Subtotal: '+prodSubPrice.toFixed(2)+' (yuan)\n';
+//                prodBarcode = input[i].Barcode;
+//                prodName = input[i].Name;
+//                prodUnit = input[i].Unit
+//                prodQuantity += 1;
+//                prodPrice = input[i].Price;
+//                prodSubPrice += prodPrice;
+//            }
+////            Total += input[i].Price
+//            if(i == input.length-1)
+//            {
+//               return getProductLine;
+//            }
+//        }
+//};
